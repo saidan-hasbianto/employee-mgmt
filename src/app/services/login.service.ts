@@ -13,7 +13,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<Employee>(API_LOGIN, { email, password });
+  login(username: string, password: string): Observable<any> {
+    console.log(JSON.stringify({ username, password }));
+    return this.http.post<Employee>(API_LOGIN, JSON.stringify({ username, password }));
   }
 }
