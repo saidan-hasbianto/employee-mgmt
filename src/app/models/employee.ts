@@ -3,7 +3,7 @@ export class Employee {
     firstName!: string;
     lastName!: string;
     email!: string;
-    birthDate!: Date;
+    birthDate!: string;
     basicSalary!: Float32Array;
     status!: string;
     group!: string;
