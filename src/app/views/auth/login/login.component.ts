@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -8,18 +9,27 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  defaultAuth = {
+    username: 'admin',
+    password: 'nanana',
+  };
   model: any = {};
   loading = false;
   returnUrl!: string;
-
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl(),
+    password: new FormControl()
+  });
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private loginSvc : LoginService
+    private loginSvc : LoginService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    // this.initForm();
+    this.initForm();
     // console.log(this.loginForm);
 
     // get return url from route parameters or default to '/'
@@ -27,7 +37,33 @@ export class LoginComponent implements OnInit {
       this.route.snapshot.queryParams['returnUrl'.toString()] || '/';
   }
 
-  login() {
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  initForm() {
+    this.loginForm = this.fb.group({
+      username: [
+        this.defaultAuth.username,
+        Validators.compose([
+          Validators.required,
+          // Validators.email,
+          Validators.minLength(3),
+          Validators.maxLength(50), // https://stackoverflow.com/questions/386294/what-is-the-maximum-length-of-a-valid-email-address
+        ]),
+      ],
+      password: [
+        this.defaultAuth.password,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(100),
+        ]),
+      ],
+    });
+  }
+
+  login(): void {
     this.loading = true;
     this.loginSvc.login(this.model.username, this.model.password)
       .subscribe(

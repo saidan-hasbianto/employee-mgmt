@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Employee } from '../models/employee';
 import { environment } from 'src/environments/environment';
 
-const API_LOGIN = `${environment.apiUrl}/auth`;
+const API_LOGIN = `${environment.apiUrl}/api/auth/login`;
 
 @Injectable({
   providedIn: 'root'
