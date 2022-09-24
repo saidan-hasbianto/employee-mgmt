@@ -16,7 +16,7 @@ import { DashboardComponent } from './views/dashboard/dashboard/dashboard.compon
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    // DashboardComponent
   ],
   imports: [
     BrowserModule,
