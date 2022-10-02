@@ -20,11 +20,11 @@ export class LoginComponent implements OnInit {
     username: new FormControl(),
     password: new FormControl()
   });
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private loginSvc : LoginService,
+    private loginSvc: LoginService,
     private fb: FormBuilder,
   ) { }
 
@@ -66,13 +66,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loading = true;
     this.loginSvc.login(this.model.username, this.model.password)
-      .subscribe(
-        data => {
-          this.router.navigate(['../dashboard']);
-        },
-        error => {
-          this.loading = false;
-        })
+      .subscribe((hasil: boolean) => {
+        if (hasil) {
+          // login successful
+          this.router.navigate(['../../dashboard/dashboard']);
+        } else {
+          // login failed
+          console.log("Login Failed !");
+
+          // this.errorHandle.log("Login Failed !", "Username and password is incorrect", 3)
+        }
+      })
   }
 
 }

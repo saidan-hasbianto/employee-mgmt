@@ -15,6 +15,10 @@ export class LoginService {
 
   login(username: string, password: string): Observable<any> {
     console.log(JSON.stringify({ username, password }));
-    return this.http.post<Employee>(API_LOGIN, JSON.stringify({ username, password }));
+    return this.http.post<Employee>(API_LOGIN, JSON.stringify({ username, password }), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    });
   }
 }

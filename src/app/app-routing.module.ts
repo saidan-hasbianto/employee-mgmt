@@ -7,11 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./views/auth/auth.module').then((m) => m.AuthModule),
   },
-  // {
-  //   path: '',
-  //   loadChildren: () =>
-  //     import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
-  // },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule),
+  },
 ];
 
 @NgModule({
