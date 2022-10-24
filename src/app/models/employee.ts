@@ -4,8 +4,8 @@ export class Employee {
     firstName!: string;
     lastName!: string;
     email!: string;
-    birthDate!: string;
-    basicSalary!: Float32Array;
+    birthDate!: Date;
+    basicSalary!: number;
     status!: string;
     group!: string;
     description!: Date;
